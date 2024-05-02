@@ -1,0 +1,312 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --primary-light: #797979;
+  --primary-dark: #1e1e1e;
+  --secondary-light: #5d8dff;
+  --secondary-dark: #0a53ff;
+  --color-light: #EADFB4;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--primary-dark);
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  background: linear-gradient(120deg, var(--secondary-light), var(--secondary-dark));
+}
+
+button {
+  cursor: pointer;
+}
+
+header>button {
+  display: inline-block;
+  width: 100%;
+  margin: 2px;
+  font-size: 36px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: rgba(0, 0, 0, 0.1) solid 2px;
+  border-radius: 5px;
+  transition: background-color 0.5s;
+}
+
+header>button:hover,
+header>button.active {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+header>button:not(:first-child):not(:last-child) {
+  border-radius: 0;
+  border-right: none;
+  border-left: none;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+header>button:first-child {
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-right: 0;
+}
+
+header>button:last-child {
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: 0;
+}
+
+.tab {
+  display: none;
+  position: relative;
+  height: 100%;
+  background: var(--primary-dark);
+}
+
+.tab.active {
+  display: block;
+}
+
+#code-container {
+  resize: both;
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  max-width: 600px;
+  height: 100%;
+  max-height: 500px;
+  padding: 25px;
+  margin: 25px auto;
+  overflow: hidden;
+  border: var(--primary-light) solid 2px;
+}
+
+#robot-file-container {
+  display: block;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#robot-file-container>div {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+  background-color: var(--primary-light);
+  border-radius: 10px;
+  padding: 25px;
+  margin: 50px auto;
+}
+
+#robot-file {
+  font-size: 20px;
+}
+
+#robot-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px;
+}
+
+#robot-buttons-container button {
+  border: rgba(0, 0, 0, 0.4) solid 2px;
+  box-sizing: border-box;
+  width: 200px;
+  border-radius: 5px;
+  padding: 10px 0;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+#robot-play-button {
+  background-color: green;
+}
+
+#robot-play-button:hover {
+  background-color: #070;
+}
+
+#robot-reset-button {
+  background-color: red;
+}
+
+#robot-reset-button:hover {
+  background-color: #e00;
+}
+
+#robot-areas {
+  display: flex;
+  justify-content: space-around;
+}
+
+#robots-main-container {
+  display: block;
+  position: relative;
+  height: 100%;
+}
+
+#robot-areas span {
+  box-sizing: border-box;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: underline;
+  width: 25%;
+  max-width: 300px;
+  padding: 15px 0;
+  border-radius: 5px;
+  background: var(--primary-light);
+  text-align: center;
+}
+
+.robot-area-sep {
+  position: absolute;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 5px;
+  height: 100%;
+}
+
+#robot-area-sep-1 {
+  left: 33%;
+}
+
+#robot-area-sep-2 {
+  right: 33%;
+}
+
+#robots {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  margin: 0 33vw;
+}
+
+.robot {
+  padding: 5px 0;
+  display: inline-block;
+  position: relative;
+  text-align: center;
+  transform: translateX(0px);
+  width: 128px;
+  height: 128px;
+  z-index: 1;
+  transition: transform 0.3s ease,
+    z-index 0.25s ease;
+}
+
+.robot-image {
+  position: relative;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  width: 128px;
+  height: 128px;
+  background-image: url(/robot.png);
+  background-repeat: no-repeat;
+  background-size: 128px 128px;
+  image-rendering: pixelated;
+}
+
+.robot-nametag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: capitalize;
+  color: white;
+  z-index: 1;
+}
+
+.robot-data {
+  position: absolute;
+  text-align: left;
+  bottom: -120%;
+  left: -25%;
+  padding: 5px;
+  background: linear-gradient(120deg, var(--secondary-light), var(--secondary-dark));
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: rgba(0, 0, 0, 0.4) solid 3px;
+  font-size: 18px;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.25s ease 0.05s;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.robot.right {
+  transform: translateX(33vw);
+}
+
+.robot.left {
+  transform: translateX(-33vw);
+}
+
+.robot.right.left {
+  transform: translateX(0px);
+}
+
+.robot.hand-up .robot-image {
+  background-image: url(/robot_hands_up.png);
+}
+
+.robot:hover {
+  z-index: 2;
+}
+
+.robot:hover .robot-data {
+  opacity: 1;
+}
+
+@media screen and (max-width: 1500px) {
+  #robots {
+    grid-template-columns: repeat(3, auto);
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  #robots {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+
+@media screen and (max-width: 775px) {
+  #robots {
+    grid-template-columns: auto;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  header {
+    justify-content: center;
+  }
+
+  header>button {
+    width: 450px;
+  }
+}

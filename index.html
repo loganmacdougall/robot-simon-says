@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Robot Simon Says</title>
+  </head>
+  <body>
+    <header>
+      <button data-tab="code-tab" class="tab-button active">Code</button>
+      <button data-tab="robot-tab" class="tab-button">Robots</button>
+    </header>
+    <section class="tab active" id="code-tab">
+      <div id="code-container"></div>
+      <div id="robot-file-container">
+        <div>
+          <label for="robot-file">Robot Info</label>
+          <input type="file" accept="application/JSON" name="robot-file" id="robot-file">
+        </div>
+      </div>
+    </section>
+    <section class="tab" id="robot-tab">
+      <div id="robot-buttons-container">
+          <button id="robot-play-button">Play</button>
+          <button id="robot-reset-button">Reset</button>
+      </div>
+      <div id="robots-main-container">
+        <div id="robot-area-sep-1" class="robot-area-sep"></div>
+        <div id="robot-area-sep-2" class="robot-area-sep"></div>
+        <div id="robot-areas">
+          <span>Left</span>
+          <span>Center</span>
+          <span>Right</span>
+        </div>
+        <div id="robots">
+        </div>
+      </div>
+    </section>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
