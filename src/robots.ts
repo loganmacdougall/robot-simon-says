@@ -11,7 +11,6 @@ let robots: Robot[] = []
 export default () => {
   fileWatcher.addEventListener("robotDataChange", (e: Event) => {
     let robot_data: any[] = (<CustomEvent>e).detail
-    console.log(robot_data)
 
     robots = []
     robotContainer.innerHTML = ''

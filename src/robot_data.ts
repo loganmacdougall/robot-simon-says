@@ -9,7 +9,6 @@ export default () => {
     if (file) {
       let file_contents = await file.text()
       let robot_data = await JSON.parse(file_contents)
-      console.log(robot_data)
       fileWatcher.dispatchEvent(new CustomEvent("robotDataChange", {
         detail: robot_data,
         bubbles: false,
