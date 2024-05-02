@@ -26,11 +26,16 @@ export default class Robot implements LooseObject {
         }
       },
       set: (target, prop, value, _receiver) => {
-        if (prop == "name") this.set_name(value)
         if (target[prop] == target._state) {
-          return target._state = value
+          target._state = value
+        } else {
+          target._state[prop] = value
         }
-        return target._state[prop] = value;
+
+        if (prop == "name") target.set_nametag_node()
+        target.set_data_node()
+
+        return true
       }
     };
 
@@ -75,20 +80,41 @@ export default class Robot implements LooseObject {
   }
 
   public reset() {
-    this.set_name(this._details.name)
     this.reset_details()
+    this.set_nametag_node()
+    this.set_data_node()
     this.go_center()
     this.hands_down()
+  }
+
+  public state_dump_as_string() {
+    let state = { ...this._details, ...this._state }
+    return JSON.stringify(state, null, 2)
   }
 
   private reset_details() {
     this._state = {}
   }
 
-  private set_name(name: string) {
-    if (!name) name = ''
+  private get_property(prop: string): any {
+    let value = this._state[prop]
+    if (value === undefined) value = this._details[prop]
+    if (value === undefined) value = undefined
+    return value
+  }
+
+  private set_nametag_node() {
+    let name: string | undefined = this.get_property("name")
+    if (!name) return
     let nametagNode: HTMLElement | null = this._node.querySelector('.robot-nametag')
     if (!nametagNode) return
     nametagNode.innerText = name
+  }
+
+  private set_data_node() {
+    let str_state = this.state_dump_as_string()
+    let dataNode: HTMLElement | null = this._node.querySelector('.robot-data')
+    if (!dataNode) return
+    dataNode.innerText = str_state
   }
 }
