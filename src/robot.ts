@@ -26,6 +26,7 @@ export default class Robot implements LooseObject {
         }
       },
       set: (target, prop, value, _receiver) => {
+        if (prop == "name") this.set_name(value)
         if (target[prop] == target._state) {
           return target._state = value
         }
@@ -74,6 +75,7 @@ export default class Robot implements LooseObject {
   }
 
   public reset() {
+    this.set_name(this._details.name)
     this.reset_details()
     this.go_center()
     this.hands_down()
@@ -81,5 +83,12 @@ export default class Robot implements LooseObject {
 
   private reset_details() {
     this._state = {}
+  }
+
+  private set_name(name: string) {
+    if (!name) name = ''
+    let nametagNode: HTMLElement | null = this._node.querySelector('.robot-nametag')
+    if (!nametagNode) return
+    nametagNode.innerText = name
   }
 }
